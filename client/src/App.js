@@ -58,6 +58,9 @@ function App() {
               <Route path="/products/:id">
                 <Detail />
               </Route>
+              <Route path="/success">
+                <Success />
+              </Route>
               <Route path="*">
                 <NoMatch />
               </Route>
