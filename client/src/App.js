@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import {
   ApolloClient,
   InMemoryCache,
@@ -7,13 +7,15 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { StoreProvider } from "./utils/GlobalState";
+
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import NoMatch from './pages/NoMatch';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Nav from './components/Nav';
+import { StoreProvider } from './utils/GlobalState';
+import Success from './pages/Success';
 import OrderHistory from './pages/OrderHistory';
 
 const httpLink = createHttpLink({
@@ -42,29 +44,36 @@ function App() {
         <div>
           <StoreProvider>
             <Nav />
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/signup">
-                <Signup />
-              </Route>
-              <Route path="/orderHistory">
-                <OrderHistory />
-              </Route>
-              <Route path="/products/:id">
-                <Detail />
-              </Route>
-              <Route path="/success">
-                <Success />
-              </Route>
-              <Route path="*">
-                <NoMatch />
-              </Route>
-            </Switch>
+            <Routes>
+              <Route 
+                path="/" 
+                element={<Home />} 
+              />
+              <Route 
+                path="/login" 
+                element={<Login />} 
+              />
+              <Route 
+                path="/signup" 
+                element={<Signup />} 
+              />
+              <Route 
+                path="/success" 
+                element={<Success />} 
+              />
+              <Route 
+                path="/orderHistory" 
+                element={<OrderHistory />} 
+              />
+              <Route 
+                path="/products/:id" 
+                element={<Detail />} 
+              />
+              <Route 
+                path="*" 
+                element={<NoMatch />} 
+              />
+            </Routes>
           </StoreProvider>
         </div>
       </Router>
